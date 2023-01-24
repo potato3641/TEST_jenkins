@@ -15,13 +15,13 @@ pipeline {
 		}
 		stage("Build") {
 			steps {
-                script {
+				script {
 					component.each{ entry ->
 						stage ("${entry.key} Build"){
 							if(entry.value){
 								var = entry.key
 								sh "docker-compose build ${var.toLowerCase()}"
-							}	
+							}
 						}
 					}
 				}
@@ -29,7 +29,7 @@ pipeline {
 		}
 		stage("Tag and Push") {
 			steps {
-                script {
+				script {
 					component.each{ entry ->
 						stage ("${entry.key} Push"){
 							if(entry.value){
