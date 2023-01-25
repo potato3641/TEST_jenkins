@@ -1,5 +1,8 @@
 version: "3"
 services:
-  preprocess:
+  nginxapp:
     build: ./ngin
     container_name: index-tester
+  pythonapp:
+    build: ./python
+    container_name: python-tester
