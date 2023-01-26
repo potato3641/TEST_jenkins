@@ -36,10 +36,10 @@ pipeline {
 								usernameVariable: 'DOCKER_USER_ID',
 								passwordVariable: 'DOCKER_USER_PASSWORD'
 								]]){
-								sh "docker tag flos_${var.toLowerCase()}:latest ${DOCKER_USER_ID}/flos_${var.toLowerCase()}:${BUILD_NUMBER}"
+								sh "docker tag test_pipeline_${var.toLowerCase()}:latest ${DOCKER_USER_ID}/test_pipeline_${var.toLowerCase()}:${BUILD_NUMBER}"
 								sh "docker login -u ${DOCKER_USER_ID} -p ${DOCKER_USER_PASSWORD}"
-								sh "docker push ${DOCKER_USER_ID}/flos_${var.toLowerCase()}:${BUILD_NUMBER}"
-								sh "echo image name ${DOCKER_USER_ID}/flos_${var.toLowerCase()}:${BUILD_NUMBER}'"
+								sh "docker push ${DOCKER_USER_ID}/test_pipeline_${var.toLowerCase()}:${BUILD_NUMBER}"
+								sh "echo image name ${DOCKER_USER_ID}/test_pipeline_${var.toLowerCase()}:${BUILD_NUMBER}'"
 								}
 							}
 						}
