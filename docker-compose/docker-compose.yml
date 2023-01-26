@@ -1,0 +1,16 @@
+version: "3"
+services:
+  nginxapp:
+    container_name: nginx-tester
+    image: jangwoonchang/test_pipeline_nginxapp
+    expose:
+      - "81"
+    ports:
+      - "79:81"
+  pythonapp:
+    container_name: python-tester
+    image: jangwoonchang/test_pipeline_pythonapp
+    expose:
+      - "5000"
+    ports:
+      - "5000:5000"
