@@ -29,6 +29,8 @@ pipeline {
 				script {
 					component.each{ entry ->
 						stage ("${entry.key} Push"){
+							echo "hi"
+							sh "echo 'hi'"
 							if(entry.value){
 								var = entry.key
 								withCredentials([[$class: 'UsernamePasswordMultiBinding',
