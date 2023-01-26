@@ -1,9 +1,6 @@
 def component = [
-		Preprocess: false,
-		Hyper: false,
-		Train: false,
-		Test: false,
-		Bento: false
+		Nginxapp: false,
+		Pythonapp: false
 ]
 pipeline {
 	agent any
@@ -39,24 +36,15 @@ pipeline {
 								usernameVariable: 'DOCKER_USER_ID',
 								passwordVariable: 'DOCKER_USER_PASSWORD'
 								]]){
-								sh "docker tag sp_${var.toLowerCase()}:latest ${DOCKER_USER_ID}/sp_${var.toLowerCase()}:${BUILD_NUMBER}"
+								sh "docker tag flos_${var.toLowerCase()}:latest ${DOCKER_USER_ID}/flos_${var.toLowerCase()}:${BUILD_NUMBER}"
 								sh "docker login -u ${DOCKER_USER_ID} -p ${DOCKER_USER_PASSWORD}"
-								sh "docker push ${DOCKER_USER_ID}/sp_${var.toLowerCase()}:${BUILD_NUMBER}"
-								sh "pwd"
+								sh "docker push ${DOCKER_USER_ID}/flos_${var.toLowerCase()}:${BUILD_NUMBER}"
 								}
 							}
 						}
 					}
 				}
 			}	
-		}
-		stage("publish") {
-			steps {
-				script {
-					sshPublisher(publishers: [sshPublisherDesc(configName: 'ubuntu', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/deploy', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'ngin/*'), sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/deploy', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'python/*'), sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd deploy
-docker-compose up -d''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/deploy', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-				}
-			}
 		}
 	}
 }
